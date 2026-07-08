@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warba Insurance Academy — Student Commitment Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#15233d;
+    --navy-light:#1e3155;
+    --gold:#c78a3e;
+    --gold-dark:#a86f2c;
+    --teal:#48868e;
+    --bg:#f4f6f8;
+    --card:#ffffff;
+    --text:#1e293b;
+    --muted:#64748b;
+    --border:#e2e8f0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+  }
+  body.rtl{
+    font-family:'Tajawal',sans-serif;
+    direction:rtl;
+  }
+  .topbar{
+    background:var(--navy);
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .topbar img{ height:34px; }
+  .lang-toggle{
+    display:flex;
+    background:rgba(255,255,255,.08);
+    border-radius:999px;
+    padding:4px;
+    gap:2px;
+  }
+  .lang-toggle button{
+    border:none;
+    background:transparent;
+    color:#cbd5e1;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    padding:6px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .lang-toggle button.active{
+    background:var(--gold);
+    color:#fff;
+  }
+  .hero{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+    padding:36px 20px 60px;
+    text-align:center;
+    position:relative;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    height:40px;
+    background:var(--bg);
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 6px;
+    letter-spacing:.3px;
+  }
+  .hero p{
+    color:var(--gold);
+    font-size:14px;
+    font-weight:500;
+    margin:0;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+  }
+  body.rtl .hero p{ text-transform:none; }
+  .container{
+    max-width:640px;
+    margin:-30px auto 40px;
+    padding:0 16px;
+    position:relative;
+  }
+  .card{
+    background:var(--card);
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(21,35,61,.10);
+    padding:28px 24px 32px;
+    margin-bottom:20px;
+  }
+  .field{ margin-bottom:20px; }
+  .field label{
+    display:block;
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:8px;
+    color:var(--navy);
+  }
+  .field input[type=text], .field input[type=tel]{
+    width:100%;
+    padding:12px 14px;
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    font-size:15px;
+    font-family:inherit;
+    color:var(--text);
+    background:#fafbfc;
+    transition:.2s;
+  }
+  .field input:focus{
+    outline:none;
+    border-color:var(--gold);
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(199,138,62,.12);
+  }
+  .date-display{
+    padding:12px 14px;
+    border-radius:10px;
+    background:#eef2f6;
+    border:1.5px solid var(--border);
+    font-size:15px;
+    color:var(--muted);
+    font-weight:500;
+  }
+  .q-block{
+    border-top:1px solid var(--border);
+    padding-top:22px;
+    margin-top:6px;
+  }
+  .q-eyebrow{
+    color:var(--gold-dark);
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    margin-bottom:4px;
+  }
+  body.rtl .q-eyebrow{ text-transform:none; letter-spacing:0; }
+  .q-title{
+    font-size:17px;
+    font-weight:700;
+    color:var(--navy);
+    margin:0 0 4px;
+  }
+  .q-sub{
+    font-size:13.5px;
+    color:var(--muted);
+    margin:0 0 14px;
+    line-height:1.5;
+  }
+  .option{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    background:#fafbfc;
+    border:1.5px solid var(--border);
+    border-radius:12px;
+    padding:13px 14px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:.15s;
+  }
+  .option:hover{ border-color:var(--teal); }
+  .option.checked{
+    border-color:var(--gold);
+    background:rgba(199,138,62,.06);
+  }
+  .option input{
+    margin-top:3px;
+    width:18px;
+    height:18px;
+    accent-color:var(--gold);
+    flex-shrink:0;
+    cursor:pointer;
+  }
+  .option .opt-text{ font-size:14.5px; line-height:1.5; }
+  .option .opt-text b{ color:var(--navy); }
+  .other-wrap{ margin-top:4px; }
+  .other-wrap input{
+    width:100%;
+    padding:10px 12px;
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    font-size:14px;
+    font-family:inherit;
+    background:#fafbfc;
+  }
+  .other-wrap input:focus{
+    outline:none;
+    border-color:var(--gold);
+    background:#fff;
+  }
+  .promise-box{
+    background:var(--navy);
+    color:#e2e8f0;
+    border-radius:12px;
+    padding:18px 18px;
+    font-size:13.5px;
+    line-height:1.7;
+    font-style:italic;
+    text-align:center;
+    border-left:4px solid var(--gold);
+  }
+  body.rtl .promise-box{ border-left:none; border-right:4px solid var(--gold); }
+  .submit-btn{
+    width:100%;
+    background:var(--gold);
+    color:#fff;
+    border:none;
+    padding:15px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    margin-top:22px;
+    transition:.2s;
+  }
+  .submit-btn:hover{ background:var(--gold-dark); }
+  .submit-btn:disabled{ opacity:.6; cursor:not-allowed; }
+  .footer-note{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:6px;
+  }
+  .success-screen{
+    display:none;
+    text-align:center;
+    padding:50px 20px;
+  }
+  .success-screen.show{ display:block; }
+  .success-screen .check{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--teal);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:32px;margin:0 auto 18px;
+  }
+  .success-screen h2{ color:var(--navy); margin:0 0 8px; }
+  .success-screen p{ color:var(--muted); font-size:14px; }
+  .error-text{
+    color:#c0392b;
+    font-size:13px;
+    margin-top:8px;
+    text-align:center;
+    display:none;
+  }
+  [data-lang="ar"]{ display:none; }
+  body.rtl [data-lang="en"]{ display:none; }
+  body.rtl [data-lang="ar"]{ display:block; }
+  body.rtl .option{ direction:rtl; }
+  body.rtl label[data-lang="ar"]{ display:block; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAasAAAB/CAYAAABRye3gAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAADcjSURBVHhe7Z0HfFRl9vdPID0koSRA6L33qlgRBUEpFhAQbFiwt7Ws7+7q7rr/dS1rL6irUixUERVBQGnSe0IJJSEQSEghIZ2Q8j6/M/dm7ty5k0wamYTz9TPOfe5MZu7cGZ7fPec5xatYQYIgCILgwdTT7gVBEATBYxGxEgRBEDweEStBEATB4xGxEgRBEDweEStBEATB4xGxEgRBEDweEStBEATB4xGxEgRBEDweEStBEATB4xGxEgRBEDweEStBEATB4xGxEgRBEDweKWQrCAJtOHSYftq5l/adiOfxgPZtqXebltQlojlvC0JNI2IlCJc4W4/G0CsLf9BGzrRo1JBG9e1Ftw4ZQN7162t7BeHiImIlCJc4ECoIVll0bt6MblGCNbxnN22PIFw8RKwE4RImOSOT7vrwc23kHsO6dKJbhw6gnq1aansEofqRAAtBuIQ5dTZN23KfTYeP0p/mLqBZq9dSkhI7QbgYiFgJwiVMRcRKZ+n23fTMnO9oybad2h5BqD5ErAThEia+EmIFUjOz6LM16+nlBUspRW0LQnUhYiUIlzCVsayMbDsWS3+Zv4QOnU7Q9ghC1SJiJQiXMOcvFGhblScuOZVe+nYJbTx0RNsjCFWHiJUgCFVGbn4+/ev7n3g9SxCqkvqvKLTtWklxUQFlnd5PXvXqU33fQG2vNdlnDtP5c6fJ2z+Y6tX30fZaU5CXQdmJ0eQT1JhfuzSKiwop69R+9doJdD4jUT2/HtX3C9IeresUU5Y6T3lp8fzZiwrzyScgVHvMfZL2/cTnGecbpB3dSPkZZ8i/oT08+lzcTj7H/g1b8Li4uIjSYzZT6sHVlHk6inwbhPN3q5Ma/TsV5mWRX0gzbQ9R5qko9XuJpMCwDjzOz0ym7KQjfOz6rZ63n/otBfDjRtJjt6r3Tyx5f53C/Bw6vfUbCmrWteR3hd9lwrZvKbBpZ4ffWm7qcUra+wNlnNjNn9d4bIX52erYDjgcC271/QL5mKzISztJZ/Ys5b/zb9TK8rhLY3XkATpzLkMbVR07Y45T3oULUv1CqDJqdZ5V6qE1dGzF61R0IY/FoeeU9ykwvKP2qCMnN3xGp7bMsw286lG74Y9S84G328YmLmSnUdTXD/PEiEmi3fVPUdPeY7RHTagJM+rrRykr4YC2A3hR57F/oybdrtPGrjl7eD0l7lrMf19UkK/ttQYTuX9oBPk3bk0hrftTeK9Raq+X7UETqYd+o8Td31N2wkElIBe0vc541fNWE2pHClLnLbT9EGrc5RryUufHXY798holR/2ijWy0uuJeajXsHm1UNpjYt741gpr2uZk6jHqOz8P2d0eTT2BD6jV9lhKhMH7ewQXP8IVBj8nv8jjm1zfVxP8TBbfsxRcXuWdPUsdRz1N479H8+M4PJygB6ULdbn+dxyD6+5co8+ReGvTEzzyOmjdTnfuDvK0Dwet662v8ujpZiYcoau5DvN33vtkU0KQdbwP8rvD7ihg8mdpe+zDvgwBGzr6fut32H2rY4TLel7x/JcWs+A9/Bp0WQ6dSm6ttrxv/xxcUv2k2bxtpq36rEYMmaSM7+VkptOezKdSw4zD+NwAh7PfAt+X6/l74emFJiaXq4JoeXenF8S7+7QhCOajVbkBMEvhHCgrPZ1PCzoW8baYwP5dOq6vcEpTAxK39mC7kWC8upxxcxUIFigrO06lNX/G2FWkxW0xCBYrV63/EV/6lARE59su/KePknjKFClzIPqssiP1KHFbw3+3/5nGesMzg80JEMuP3lSpUAEIBCzIpcjkdWfYKRc15kK0Hd4A1ZRYqcFp9L67OrRX65K3fFxXk8XHhsx3/7X3eB/A49gNYM0l7f1SieBf1nPoBC0hIqz7qN7CAHwfFxfbn6xQXFVGRYV+h+v0ENu1Elz23jm/dJ75p+843z9GeYeNs9FpltQSxNZRyYJW21wYsIpCw/Ts+l6C40PYe+vnPSz9NMSvfYOur912f0dBnf6NmfcexRXb28Dp+ToGyAsHAR5aWHA9uVkIFMk9F8u+m3fDHqPUV9/H3BkvRk1h3IJoDLwShstRqscKkbASTsxUQE+PVLMAklnZsszZyBJOAkYI814mPcF9ZgUkjI670/BO4uTDpVhQcJywDWIJG8tJP8YRbEWARHFz4bMlFQGkkRdqsEzOYoFMOrtZGFcc7IJRFAu4/O0ZL0ovSY7er73ETj2DNtr5yBm+XC4NzIbTdYLbSHc6fuuiAKDfuejU16nSl+txKoC0uRHC8MSthxTk7K5LVuSpW5wWWI6w9iF7bEU8oge3LglkRGijhwzk4se4TOvLTPyggrD35hTS1Pegmfj7e2lb1sTMmjuZt3KKNBKFi1GqxwpW0kby0U1Rw3jnXwyw+Olku9utXxzrBakKxoiD3nEvBA8kHftW2rLE6Vp/ARhTSup/DLVh9Tp+gJtozHIEont5usBoVRSYRB3Ahml8XEyXcgGbYYirj2DFZJ+2zFiuQsr+Mvy8VmyA17z+B/EIj2N1nt5BsQoD1yZaXT+cLkeglf6bds+6gZPWeoW0H8ePl4ULOWYr/40u2fCLnPMDiH9bjBu1Rm/V8ISedwrqNoLDu16vHU3n9yo7teNte+4gS+6N0Zs8yHhvJPnOEXcqB4ba1MoC1rB5T3qPwnnDnKrxsr3P4h7/Qge+eLLnBvWeFT4Mm1CCiO18YwPUHqxDHXpDr/hpUgK+vtlW9fL1hM1tZglBRardYtRmgbdkxCw1wZXFlxDuLFSal88riMRLa1vl9AFxnVlfYOrAK3HHvGQltN4jXZIw3rMUNfGQJDXz0BzWJjtSeaedc7DZtyzWNOlzu9LqYKAfMXOSwNqNz7vh2bcsaTNYQa1dwMEv6aW1UMbzq+1LH0S/y65ze9p221w6sqP4PLaA2Vz9IvsHhbGFEKkvT7n61Xs/z0kRBBxY6XLFwx+Ukx1CX8f/k9TMdWFVYxwppO1BZVsM4iMFKqCFwuAjAcWANDejvhcATq0AdBEiYPQQNWvQquaDAb88vpLn2iB24HrGGVs/bl5ooEcUFBixquH9PbdXWZt3gYokVeO2H5bQrNk4bCUL5qNVi1bD9UG3LDiZJB9TE5cqywkRhvgrNTnRcbAdWogiSIVYGmvUbr23ZgFCdPbJeG1UeBBy0v+FpbWQHgQVWrid38AlqpF7zGW1kp6x1K3aFGQjrPoKtHSOu3ITlARM2AlVObZ5N+Vmpao9t8od1g2AJnJMWQ++knlM/pIiBEyk3JVbdbJZIfR9/FgkjRfk5VE/tN4KIQxbvO97hceLORSWCB+s37egmdgVvfXM4B4JAXGBR28Xafu473vgCu0FPrJvFYz1+KTCsPbt8HS+EipXl9BSd2a2t6WjPbTF4si1IRd1aXn630/ECvH+O+qztRjyh3vN5Xnc7suxlOhe3w8njUBoBvqVHxVY1CGs/nOB4MSgI7lCrxQoTrX8jx8rPZssqW10pG60buMOMZJ5ytLoQhm0EV9RBaiIwg1Dh3LMntJENTJrm51bOHeYMBAGuMUfUJFeJoE5YJWbq+zXQtpxBMEva0T+0kY0m3a+nxp2v0kY2EAjCx1Zu9L+x3be77nG2SnBxoe9jwVDHcHKDrWI4vmM92ASuVIDI0Mz4qJKLFazHZSYccIjkM4IJP2LwHcri3qsE5HveB6sKLkgIum6RIjoU+2yfz0gx+TVsQS2HTlUW2jFtn42mfcbyfeyqt3k9EGKYoEQRx+zfuA0/Vh703zTuIWYQSbgAsTbrymVsxcW0rEDO+Xx6d/kqyshxdlULQmnUarECZqsn64yj2JitKoQKG0HejZGshEPalg1XVpXZasCiOXJmEPptBO608kTGlQUmOVgVRgKatFUGR8W/yrNHNmhbduDuckVS1HKerHUgoA21sHcjmIgzTu7VRq7R3WPO9958jwuM1lc9wNv1fGx5RMgpanXFfZSwYwHtmz2Dw9SRV4V0BFzEAD01Yf83j9G+L+/hSEdM5i2HTuP9AGs9xnU7/D4w2SfssEWWpisLBq/XtO/YEtccoviwTw/s8PLC8Xrxa4EWl00vuaCorx0v1qpwMYO8sJ0fTaBdH99Ocb99QI06DisRed0yxeNb3rim5Ia1NDONO13J5+DwUtv61qHFL3CABQT64IJnS4S7LBoFlZ6b6IobevegO6+6nJqFhmh73CcmKZm+XOd4sSMIZVHrk4JxlaqH/oLCvEwO9YUvHyTuXMjuEoBJsMv4Vylx16KS0GLQtPdN2hZR3O/vO0TCNe9/KzWIcGw2h6vZo8v/5TBhR6iJMbhVb3VVH6quypdqe0GxslzCKLhFT21sBxOKOZoQk03jLldrI2cS1eScHuMYWYVAgwYRPbQRogyT1FW/o4sSYtqo0xXaSKFEL1dZKin7V9LJ9Z9xpJoOjqGDsiS86tsncSMxv7zmsF4FFyCECjlgCdvnsyDoQAgc3tcCTPKw7vC5IUz16vtyZF2TrtcqC8+WXI3jh5XbtO/N5KtZDuwiVO/tqywpuNlaDJlMzQfcxo8BJO827nIVW0x+wU15u801Mx2+C7wv1gl1Cx2/m2B1LiE2CF7ww3F1vtohORnH26B5N17rw36/kHB+D4Sl8+PqdxbSui8FNG5NjdVn0MU3tO1AdfHTn4+/QfOubMW1HHa3ej2bazO4RQ/1GUP4+HRhxA3nzy/Ucd2qno8fu51xvrzVOUIuFyIN8Vuu7xfAf6e/b2mkZmXR+oMm13kZjO7Xm566aST1adOKJgweQM0ahlJC2jlKz3E/svVoYhKFBTegTs3tSdGCUBq1vvki1hJ2vG9fDAfdJ/2XJwaw65OJlJ+ZxNsN1GTQ686POXqs5KpY/YMe8vQqvsfz8HwjfWfMVZOOo5sGyZ3Hlv+fNrKBhX69GsGez6dpLisbttyaT7WRHWOiqQ6uwDE5OlPMYdrmnC5Mmj2mvF8iziAzPpL2f/uYNiofiExrO/wxJRbWV8zZynKNVBaKEWPiK3K1YOHoIBhh0OOoTmEtfELNEp2QSE995RhNWhbv3TuVuwabWRV5gFbsiaQD8e4F1oQEBtC/p9xGHZo6u6EFwUytdwPiahtX1Ub0dStYLrpQAYRq87266tWBFYD1J2B2AcLVYxYqYA6sCFJXycayObAIjGCCt4yMs7hOQDRa/KavLG6znYQKV9zdJr3lIFSVBeKfb3IzGuEISANwXaHyhU7jro6uQF5bOrJRGwmeRlgD12uTVgzs0M5SqABcg29Nv4P+POEmGqSeVxZYt/pqrbgDBfeo9WIFzOtKEAeQGe+4XgLXCDDnTZUswJvWu6xydhAlhzBnI026Dte2bJgnbGAZGWcKoS4PWK9o0uVadgFVJbA4Ye1hbcUM3J/m6g0QZn2tBmANxstUd7HMnC2hxmgSXD6xCglwjkw0c3X3LvTPO26hh0c6/ruwYvuxWEkYFtyiToiVOQ9Kj+hzCJ5QE6ouUlgvcHCbaWJlrhFnFVxhVbHCXAMwqGlnB0sLOEeOVQ7k1WDd7OTGL7Q9pYO1DGMJH/0Gt6hzyP15ztcxV7FAIAYiAY2YPzsSX80pBekxWy0ToAXPoF8796MRQwLcL5Q7bmA/enXyreTrXboLePW+/ZR9vmIVV4RLh1q/ZgXgakLhU6zr6Ax+YjlHSSFcGWCBHjXZdA4teo7StWRauLIGP/kLbX9vjMNkbFyHslHMUVzGSCtvvwaWBXHPHt1IOUlHtZENJPeiGoWO1ZoV1tpaXn6XNrJTqCZ7VFlAhQQjEN1Bj/3okItjtWYFsepw4/PayJnYX9+iM3sdKy90uvlvHDyhgzJM547v0EY2cKxGywqgfqE5qRih32ZR1IErdtcntxNqH+rA/YrAB1SFgKVmdXwAa4EIhtg9axK1H/knrjCBnCy4TVEEFxcOAOdt/9cPU7/7v+GgCnyOE+tncV4e1ivxd22ufZjD3uFu3f/1o9T7ni9KXMxIwsV6Zrvhj3OhXCT+GutN4neANVEcL6LydHDBhGjE8F43coKzDvKtUIQWkYUIhddB+SysWepRq/itoQ6kft4RyNFx9J85RQIXE5FzH6TcVMdEW7ivUV/QXeZv3ua2O2761cNo6hXO+Y2lceZcBncSjktx7V6eecO1NH5Qf21U+0CF+fTsHA4ySc/O1e5zqJ6XF/n7+HBZK9zbtn0oLKQBhQcHX5RyV3WFWh8NCFC2Bm4ro4iEtOrNeSy6gGHSRXi1zvmMJMo4sYu3EQmHiL9kQ6Ir8mVaDbtbG9lAgMOZPT9oIxtIOoVb0HwzTrw6iK6Dm0wHpZLMlhoizBDNiOgv4w2Td1iP6zl6z1hPEBM91q6MuVKoOWguMBvUrLN63pXayJnignxKjV6rjWwg2EN3neLcHl9tq3ZuBK5W82e3Wp8ryDvnUBXCCD5P/Mb/cbAInoP3xNoZKsej4jr2n1j7sRKVepwwi8f51qa/Op+Xc34RQtjR9gP78NlR3giig5BzRNtlqwsD5LwhehAtTCLnPcTC1HHMSxwcggoZOHZU18+I30dnD69Vv5fBJWuWF7JSWZyQJoALClS0x+dspcQax+LfpA27SCF+xs8Z++ubdD7zDO8P7zmS11hBbnIsu4ZxwQJLVP/+kDeG48N3ivMSNecBFjbkmoX1HMXrpWnKwkXeFiIyT278nKNQm/YaU3Je8BvDOXMXH+/6tGKPYwqHK67q1pm6RDhX1CiNBv5+dPPAvhwB6KozMSb3Mf3dT2auSZArho7IWw4fo++376bP1qyjL37fSD/s2E0r90ZxWamtR2Job9xJ2nP8BO2IOU5b1Hhj9BFaqx5bE3WAfty5h77btI2fv1m9zt7jJ+lwQiI1bhBEDQMrlk5Q16kTbkAQYnIFslBpVQiAMagC6MEWOjZhsxNq4QJEMdLKgL5LxnB3NYtqG+6Bqt/hvWztL4ygRJQjVq9b/vUxY3UPW3mhihvh3KepjPJLQeqCQa/c0HHUc7wPJYR0fAIblzzOt2H38DmxAtYSLFuE+ptB4VhY0Lh4gfBgzbHtdY/xpO8+xXzxoR8LxARWc166vd0GvhdYmDhOHE+ShSsY+2E5OfwuNGBJQ6g63/wyiy7WBxF5iQshYzJ7cMs+DufFlQXriq5KfFo1seWmlUWwG2tWrnhl4niX1hOEbE2Uc/UYTwERjnM3bKZn5synO979hJ7/eiF9snotrT8YTckZrgtdl0VKZhZFnTxFv+0/SAs2b6eZn82RNTwX1B2xau34j8DsrjK63wBcNpgodMzPxxW6EUxuZysZ1WarumALmWcq4IFF7ykzpVWFdxeridRewbvYKW+rIiDkvzRgvejWme5iM15U6AVn9ZurivcAFTjClCWDNT1u96JfuKhzDusG1gxcheg5BQsHlojeV8o9lPir19SPN+XArxyFajxe7IOXvWmfm1gYbRc72neuXTvAhYxKKHaXov03cU5Z/rAs4Q7VgeWEliioDq8D4TKeFxxPeenfzr0mieVZs7IC7r6bBzheKOqgEaQnAcsIFtOjX8yjZ+fOp2+UiBw8dZoKCh07OFQ1i7Zsp/MFzhcvlzp1R6yUuBjFxwjWHZBsaQTPDW7hXMBVJ7SNLU9LBxOt+eq35WXTLIMW9Fu3250rD2ACK6EC0YA+AQ21LTvu9DBCOLo+sRpv6AkVOXuGZfRfiBYNiSoU5lqBcClafWb9NmCmc28xh89uAQI49ErjWPNrP/JZdofpwN1nDOc/tWWu9og1ba99lM8xgkVK1EE7553HvcIuP+4zteJ12vfVvWzhuE8xR0fqx3v053/xWpZxXRC/GQT/wN0IFy5cqeaKHsEte7OL+pQSTmNuHihQlhkqq5tBArhxnRBrlMbzAvdpeRnQ3r0gi8zcirUzMfLoqOvoqm5dtJEduMwQHViTwGU3S1lMD346m178ZhEtVMIRc+bi9gg7f6GAok+711PuUqLOiBXWrWAtWRFscgHquNqPdQm9ZI8O2qybwRpCacDFpK9R6KD6RFkNEUujnkXbcnMUo5XHD++rT6zGG9pvmIM2AK7g9TqHxgohOiVtLVzgG9zUyZqFMKDQrCua97+FO/iiggNcXeYLDFTWMApi/wfna49YgyK3ra+4l0XZGHIPkYFV1uHGF2jQ48uo+8S3uF4gIjbhqqynXfQYY4/078ye3OzFQS04Dt0ig6CXrEmpzwk3JKI2cZ4TdtjczFhzNINOwOoHTEc50Vx9eZqg4rUQWOOAsuZQsNYYVIEyTsbzYlWYuCzQfr6JGzlXSVXUAv+lW26yFKxNhx1rKl4s4OZDkd2/zv+elm7fTSdTndechZqlzogVaGhwjRixWn8CepULM0YXi465mjvcRlYJw0ZgvRn7IgFMevqEbWUJuipxpGOewAGCB4xAKCoDrvY7j/u7NsLrO+afIfINgQ1lYf7sAAEFrihW/+G1u0z4F0dhxqx4zSFoxm1YZGxCAzcbyi6VVNVQj+WmxlLc7x/yBQjEB242WD6gID+HowtBnqFQsR7ZaXSN6iByD0EVuCBI1Ept6S5P/bUQtQmXHo6DGzva/1xdGDVRVvp0XtfjOpKaSDZU5xg92oznDK5oBMKcP1e59itmEF7ujnWVlFE1YgUgWD1atdBGNjYdPnpRi9wmpJ+jj1f9zm6+jYdskcNGsEbXtUVzGt6zG9dCfH7caPq/Kbdx4vNjo0bQ3ddcQbcOGcAJ0Zd17kCtmzgWyq4oHaWqhxN1SqzCe43hPB8jmCAadrCeWBF0YRYcCIjVArVeyVunab9x2lbphBvqDgKUH9InMP+GrXhsJDjCuYagEUy8ZgvSfGyY6K16VJUFhAK183pOeY+tEh2zKyq89xinxF8ruLafVpxVB9aRGS/NFNTvYdW2vvpBXuNDrUEdBFuYLUO9+giju1UN7lWIkdHSQERhYNPOnFQd8+tbvMaDEPbTW79l9xoiIFGRBJZW/OY5XGwWzzmu7nF+7HUb7e8BELKOeoYIm4e7GGIF67SkdxiqtV/3OH+ms4ed28a0GHwHR6Ay6hhBxMBJfP6iF79IJzd8xuHy6ESMcHzOAdQ+JwJ3jOfk0KLnnXLk3AHWVVkknav8+qiRiZc5Jt5DqCBY1Q3WhOZv2kbPzP6Olu2wr/F1bBbOovTO3VNowVMP8w3bEKlpV17GotW/XRtOfL5pQB+aPGwIPTDiGnrm5lH08u3j6dMH76b37pmq9g+ltmHuV783MqRTewryd5zHhDoSuq6DoqfBrftwiSVM2Mh3QWgyBMsaL15oxwK8r5qQMVmggKuxKKxOaJv+fDWLEGO4/1oMnqT2Ok5YVvgGNVYTXxsOM/ZrGEHtr3+aAsNspWjYdakstPysZHW8zalJt+HUYsiUkknIFThmWBwIcYbLst11jzl9RuTqwI0EK0kPaXZ1Q+g2isCiVxYHCJjeH8Er+RmJLGCc+6QErSwLEODCAb2VcKwoJIuCu1YWWT31Wmf2/sTipodcQzSQrwVhh2UMd5ix2K4OjidACU/iriWcs4TzASsIzQ/1EHJbEVpltxUV8vnl4rodh7H4QTjg+oNl1Wn0n/k7ATjH6IuFLrwZJ3er42nP61y4WABoAQILSX8PWE6op5h39iSFdR/JOWHIQdO/a4BiuagQgqhD7EfBYxwPfiO2NdSeSnz3U8SgiXzMuJDBBRVcicgXxHsiWKPDyD/xY+jXBSvdXG4Lnw+/JXe+IyNtwpvQZiUUyA9yha93fTVJW7vPK0IrZYkkZ2bSMcO6UJGyLCEK1cWqffvpneWrae2BQ5wfhaRoFOdF8MfUKy7jAr0oslvRHChUBenXrjX1btuKIk/E07lyWop3XT2M2oa7mrMuXepEUrAgCFXD99t30aerndcodYL8/GjRM49oo6ohPjWN3XAZufZJ/cMZ06q8wC1yo+Zt2EI7Y2zNOUf26cn5X65qHVYFL3y9kPYpwXKXzhHN2DITnKlTbkBBECoHJvDmDUO1kTMoi3Q6zZzXVzmQ4zV2kC35XKeqAy0QFo/gCQgVAjvemDaJnr5pZLUKFUDvrvIwold3bUswI2IlCEIJsJwgWKWxM8axvFNVMKZfb67eoBOtrKCqAqWk3vppJTUMCqSXbrmZAzt6tXbsMF4doGpFVp77NQ/DQ4JFrEpBxEoQBAdu7NeLJ05X6G60qgRCNdpQbqmq8oxeXfIj1z68QQnwa1Nu53JRFwuUVSoPYwf2pQb+Fa8QUtcRsRIEwYFGQUE8cboCYoX6eFWN0bpC8vHBU5WzrlC6aH/8aXpy9PX0zE0jy90OpTIgT8sqFN4V3Vo0p9uGOrckEuyIWAmC4MTNA/pRmzDrnKGCoiLafdyeg1ZVQKgQEq5zqIJihYCNm/7zDrVs3Ihem3q7shTLU/Oxalh30DEvsywgVKjQLrhGxEoQBCcCfH1YsFyB0kjVwdBOHbQtqpBlhci7Bz79iiZdNpj+etvYCuc6VQa0RPlpp/v1Ga/t2Y2uvIjuydqKiFU5QI6MU2kjQaijwBWIBFgr0O4Ck3JVg5ynDs1sIevlFSsIFULFnxt7I1eWqCnQ/sPd3Kpgf3+aKO4/txCxchMkGifuWsw9hgThUuG+4VdZtgVB4vCyHbu1UdWiW1cpmZlc1NUddKF6796pdF0NRtQdT05RYuVYrLg00MxSF2ehdESs3CRhx0IqLiygU5vncLsQQbgU6NS8Kc1QgmXFDzv2cB+qqmZQB3vVD2OisCt0oVr6p8eqPW+qLCBU+W6297i2R9dSA1kER+pEuaUdH4yj9Nit3Dq8ukA/IhT7QNdec6+r6uD4mvfo1JY5lJ1wiBK2fcftJ0D2mWhu64FyUnqFb1QQz4zf57LqvA465+K5xhYhqIyOdhNot5ERt6tkP0oT6aWFhEsbCBbcWocTzmh7bODfA3o7Xd7FVp2/qsB62cIttv5yI3p3d8i/MgNX5GNfzOP6fc1KSWa+GMA1+sXvG7RR6SA14NmbR1WqmeWlRp2wrFB/DsU9qxu0FEf79IsB6sjhM/k3bk2BzeyfLTvxMPcsykNDQQ108TV3OrYC623Gvke46T26YDEa95+Lc2xGKVzaPHT9NTTQYPHorIo8UOWRgcg1atHYVkg5I8d1Qd4LSigRno7Cs6iMXpOkZWfT3PWGxqplAPdqi0bOvekE19RqsUKhU/Ri6jLhVe4JhArcKPhZHmBF5KY6JjmiYnXqoTUsTNxltgZoPuA2anf9U8pa6lmtFqMguIN3/fqcr2RV3LU61q70VhuluQHf/2U1Xd+7B1dDr2nmrN9MJ1Lc64H1oBJ+uACF8lGrxerw0r9S3G/vayM1XvY3Or7qbW3kDsXcUiH+j6+0sa19/d4v7uKWEMlRv9C+r+4rtwBWJUd+UJ9p9bvaSBBqDriuXr9zojayg7JC7rq/3KUssUIJpfScXO46XNOg7uCKPZHaqHRG9u1Jtwy27q8nlI4EWJjAms75jDPUeezL1Gv6p9zmIn7jF9qjgnBp0yWiOT0ycrg2soM1pl/37ddGlSc00Nbn7ZxFG31U0FiqrLlpV9W8RbXtWCy9qyw8dwgJCKCnx4zURkJ5EbEykZ1sa/yGJoHobYT+SAhMqAs0iOhOrYbd43DT27Sj95Jxf2hbyf0QrBk7sB+vE5n5aOVvdKGgUBtVjkBfW48uP29nt+OCzdtpyrAhLJw1CYJO3vxxBQeZlEWgny/Nf2qmNhIqQh0TKy9uG+8uVq288jNsobh6PhU6u+rdh9HMjluSG3uSXxTs71dcXKRv2O4VxYX5Tg34rEBTyVZX3Otw01vro626cT+aGgqCK7BOZBYsdN99cvY32qhyBPrZ/s2ZxWrx1h3k5eVFdyixqmme+OobrmFYFmi5sviZR7WRUFFqdeh64o4F3J01vJctrDtx5yLKPXuC8jOTOfjifEYiJ/Kia6z5PuXAKko7spFDwSFMBXmZat+vat8f/FrojHv+XKLat5Iad7qSGne+ii0shIgjqCNPvU/u2ThKjvyFLuScdXp9rHO5em93nnP28DrKOLGL0mO3UWEeuuTmU2r075Qes4U77+KYM0/uocxTUfzcsO4juOOvIFws0FEXXaXRDVeHuwyrffxYJUjOyKTf9x/iMkQInQdns7Lpvz//yp109TWtmuK5eQsoNilFG7kGzRRnPXCXNhIqQ63uFLzr49u4/XePKe/Zxp/cToXnc3hiVyYDW0HeAaHcUt4nqAldyE6136v9F9R+WBCwpiByAPlLwa37Usr+X3kcGNaeuk96W/1dIyVKaXRk2SscQWgGlk1RQT6LZ0GurQxNfZ8AKryQS96BDakgJ93pGIC+7avu89W9fryw5nD8yJ1CMnL2mcOa9eTF7d9TD/2GRu38WMMOl1PnsX+l+r6u81EEobr4btM2mr3OdpGnA6urMlF6qD34528X0wvjRnPtPDBv4xaKjDtJ/7EI8rhYoNo8uhqjUkVZDOzQll6941ZtJFSWWi1WiOTLTY2jfg98y9bInk8nU3jvMdTuusfZsvIJakx5aac4Z8l8j/JJAU3asTjBzZaddIz3wTpBkmxO8jF2uQWFd2ThMwILC+5GCEp+Zorl6wNX7+3Ocy5knyXf4HAKaGyrzZaXdpIFNbTNQKrn48/h9Rknd1ODlr3J26/s1gf4LClRKykjfo96rXi+XVACWhrtb3iGmvUbr42E0kCaQ9zvH2ojG83738LpB2ai5j3stA7ad8bcku/airz005R6cBWdO76TctNOqN9HmvaINW2vfZgiBk/WRtXPz7v30Qcr1mgjG5URrE3RR+mfS37kYrTDunRiq+rxL7+me669km7oXXrye3Vx7Ewy/X3RD2z1lQUEFkIrVB21WqzgIote/ELJOg4m8d7TZ7EIlQaef3D+09RMTSawUEJa96PmA+ruFdB5NdFFf/8S5aTEanvcQ8TKfapLrPBbRXrGmd1LS37n7nCxxQpsOHSYZq1aR6lZWdoeoluGDKAHR1yjjdwHycb//WklWyawUJbt2ENLtu2krx6ZoT3j4vKHEs+3flpBufllr4mPG9SPHr7BOWJSqBy1OsACJZD6zpjHCcGYFPorC6ssoWKUPsOVB0sKaz6wMuoqcF1GzptZbqESPIOYFa9T4q4l5RKqmuKqbl3on3fcQkM729t8fL9tF0fMZbhZhVwn57ytHXxwgC3QYntMbKXXwSpCdt55mrV6LXccLkuokDgNa1KEqnqo9dGAcJlFDJrEV7Fw+7kDIuAue24d/93AR5ZQuxFPaI/UPU6s/ZjXwITax5k9P3BiekWoKYdJ+6Zh9Mrt4+m+4Vfy5A3WRB2kZ+bOdztxFuidiPVAih3HjlPvtq15+2Kx+fAxev6bhbR0e9kVOi7v3JHenDbJI6pp1FUkz8oA1r/UP3PboA4A91+yFijigFc9dn22vGxaSV7VxaitKLgPgnVOrJ+ljRxB0E2LIVNKvjukJJhBeHdNMvGywdylt68mMKfOpnHy7N8WLKW9cSd5X2nEJCVzr6cAX19KTLddbHWJuDgV1bE+BmvqH4uXUcyZZG2vNU1DgunxG0fQ324fV+P1Ces6IlYaqFwRp6yQ7DM1V1qpqkmKWqH+7yi+XvV9qPe0T6jH5Hep9VUPlORVBTWztxMXap60oxssW9F0GvP/qNedH1Oba2aWfHdlVduvKXq2asGC9dD113KuEdh+LJZe/GYRfbJqbamBCgfjE6i11lY/QROr6u76C5FCxCECOdyxpsb070NvTL+D74XqR8RKgVBzVB1HCDkCLuoKVpU34C4Nai5FNGuWsq33c3G7tC07oW0HUljP2leuZ8Lg/vT2XZNp8rAh5O/jw/t+2LGbnvjyG/r4199p/8lTvE+noKiIgzR0FyAsq+oUKqNIfb1hM49LAxYULClYVLCshItDnRCrw8tepuNrKl7sFblReqAGot9ObZnHLpj4TbPp5IbPtWfZghUQmAFxQx4WbkgSNoKQeYTUn4vbyffmx83kJMeo55Tty0ciMN67MN/9xo+5FkEVjTpfqW0JNYezi87Ly7a+o2Nl4TfrN0Hbqn00DArkVvNv3z2ZbhrQh0UrPSeHlu3cQ3+at4Ddg6gtiCCGKE282miWVWpmVrV000XTxg9X/kaP/G+uWyLVLjyMAyiwNoU1KuHiUifEKutUVKXdd7CqIC5wB6I6BUQErUOMUXSoKMECdCqSCi/k0NHl/9IesVOYl8Gighwmvi8juOHE+k/p0OLntJFrUKUC752T4tjOpDSQkGwmsEl7bUuoOSwsK9MaE6qimAlsWrVNDmsCTPiPjRpBH82YzhN/RCO7e/Dtn3+lp+d8WyJWumWFKhCwyqoC1PP7adde7iyMG7axzxW+3t7cJv9vt42jj++fzgEUeuCIcHGpE2I14OHF1HPqB9rIDYqLKCfpKFtKVnQc8xJ1u+0/XHm96y3OglQaqCaBSEOUP8I9yjTVFOj2a0avBegWtTcFz8Oxsqwc/ykWXbCFbhtB1ZW6AkQKE/9H901n8RrSqT2LQFxyKls5AOta/176M+9LVtZVUVH5fo+5+flsPSE/CzlbT371Ld3z0f/YmsL+0ujWMoLuv+5q+vTBu+m5sTfS5V3EkqpparVY7Z41iaK+flgbEe35bApFznlAGxEl719JW964htKO2Tt4wmLa/elk2jd7Bu38cAKdWPeJ9ogz294ZpayeF7WRe6AbLywg/C2SP+EONHJq82y1fybX+LMCdQ2P/vQP2vrf6/l1UEjXCnwm9N3C58Ntt/rsZqwmN7Q/cReUcxLco9iqgLLLiLyyLSuves7/NPWuzk7U4osKf18fdgv+feIE+mLmvfTUmBvo6u5duFvw6bR0Wn/wMH25diP95bslNOHN99kaennhUiViy+md5atY0L5a9wd9/tt6en3ZL1yiCd2DJ73zMd361of8/M/WrOck48MJiZR3wXWuFNqSIFji/6bcxmtstw0dSM1CQ7RHhZqmTlhW5SHu9w+4COygx5ZxftXpbd+Wua7kLrBkDi/9C5dFajF4MqE47pFlLzsIjn/jtuxetA5LLqYD85+ms0f/4LUzlFTKOh2lPWYHgoP3weuiWrpvsK3QpxnUHTSTlXhI2yob89W+4BqU6zKDOo/WlG1Z1fOx9XMyUqh+D1a4FLFaBpo7hijBgPTOfmQGiwbWuQa2b0v16nlxG3tYRNuOxioRi6aVe6M4UGP+pm20eOtOLnyLmoJxKaluVUNHcMTwnt04ifeNaZPoy4dncNBE/3auy14JNcclNRuhCkDGid3c1wkTSaMOthYH6bFb+b6yoAU+AiHCe47ikOLm/SewYOWkxGjPIC5C27D9UNvak6kqAYrVogZgxMCJXN+w1/RZFNpusPaonfRjm1kYO45+kVpfdT/5hViLVXDLXtqWHVSmt3IPChUHgSxpR9ZrIzsosmxN2ZaVT2AjbcsO6kVaUZeSvn+LOkgblDV19EwSiwbWql6dfCv9+PyTXMD2idHX061DBtLQTh2oZWPncwQgbEH+fix+CNJA9N7gju3579CaHwES85+cSbMfvZ+eHzeayyP1at2SApSVJ3gutV6snK7+S3GJXMhKZcEqKV2j/S33wNK2S5vIiwptV7BWLhoASwjU1wrL6lfW5nwZflw7DiRvFhfZjkevOlDf1/mq2khBnm1y8guN4Hv+PBaf26plCAr0wtqTqhaVB+cdLWIOLnreqY8a1gYbdRymjcpPQFhbbcsOamE6U6ys5Whtu3aDQrEbDx1h15u5tFI99e8E+0b3600PjLiaXpk4nj5/6B765c9PO91+fuEpWvT0IzRHidGsB+6md+6eQv+YNIH/7kb19z2VMMGCE2oXtbqQLdas4ALTgyuwZoU1n/Yj/6QEIZD7VWHdqsXQqVyhIeXgGko7ulE9FkQ9p3ygxqvp9NavOdGySbfhtPXtkepquAW1uvxu8g4MoUOLXuBOwSjoimCM01u/VdZPNPV/aAGlx2ym2FVvq9d5n4Jb2ZICIVY7PhhLgWEdqPO4V/jx9OPbaYB6PgQu96wtcz9h+3xecxr67G8cco+yOm2GP0K+6mr62PJ/c7V1WE0QUFR2hyWIPlfH17xHPe/8iHLOHKHY1eq91edu0KInV5snNTmiNqIjxbT3y3stQ9jx2g0iuqk/szVthOvSfOXu36gV+TYI00Y24EJF65L6voHanqoBrU5Qo9FfnW9z9YU8dd4g8GjTYgRWKy5AAsJs9SBxoYHn6viGNuM2LQCvjWP2MZXkKjifRRcyU0pew0iusn59Q9RrmC4eEOkJsYdAWa5VKZoPuM1lGS+rQrYo+2V02yIqNWblG9rIBn63fe+dzb8PHavngZooZFtZvvh9Iy3csp0bK95zzRXaXkGwUevFyqdBE87oBxArtFIAei8p/MOGgLEFoz4qxAdtOHQ/P7L/e079kC20+D++4NwqHW//ECVAuQ5XzVgjguvtzJ6lTmIF4GY7/tv72gjPn8aVIpL2/kgxv76p7bUx9Nk1fCz7v33cpaWDK/TBTyynpMifS8TKJ6Ah7fn8TmVZNcPlPa9h+SmRdRYrWyBG9JI/ayPhYgCR7zXtY/79WIEAGwTiGBkwc6HD2iMEceeHzhXv0VkgtO0gCgzvyG5nNAy1oraJFSL3Zn4+l5LOZXAEXk03VxQ8j1otVogEhDXQ/8H5LCg7PxhPIa37qn+kd3BeUqOOV3BzReQ7nY1eRwHh7Sm8x0jKU//I8TiEC88xtoRHfUAIS0BYe2rc5Squ0QYL7XxmEq9F4W8ArCGA5oxGsQJI8s08HaWsuU4la06wyNKO2qMSQathd7OFA4sMonIuboeyZJyTH9GjC58TEYRN+9zMAoy1t6TI5SxyEDRMbpggrUAQSWlRj0LVge8bKQ/e/sHaHmciZ9/PXaKN9H/wuxK3rs7Rn//lUozKAuWYUD+wtvDLnkh675fVvLYEl50gmKnVYgXBiF31X3bxFRXms9AgLwquGwgMd9SNXktN+451cmfVNlBJAwEYXcb/g6+uAazDE+tmsZXX6or7Sp2c4PI8vvoddp0JVQ+aeLa8/C6+mCgLowdAB1YxrGMjCNaJnD2DL0TKAsVsja5FVGNBV4HaAuoFosDtMzePqrHmioJnU6vFCmsyyVEr6eyR9WxdNOk2ggUKi97HVrxGncf9nYMJek//tFbXw4NVdnjZK2wVImgCa1gAFtmhxS9wBXVEH5YF1nQQ+Ziyf6VbE6AVWLOCNacLZlWBY4M70x/WhWnNCn3HEMpttlb0YykJNNFeQwcXKLrVDFdwPR8/J9ccwv+xHom1SjMQFN8GTXjd0AgCZrCvSbfr1Hs3Z7dfCKxrLUinNOAB2P7OjSVuaJ3BTy6n+r5B2sgOjgG/YVyouAIXKoXns7gBpE7HG19UFnnt6FSL8HPkSyHxFpUiBMGKWi5W1sBlhoABNGJEThMqild1QMDFBKWg9OAMq6AHofaAAJ/o7/+fNrKBwJGBjyzVRlYUU9qxzey6xlrX+XOJ7I5G89HGXa7hDsN7/jeNBVmn+6T/cuFbTwdlllAXEKHmr0+dWC01AIW6QZ0UK0HwRHDRETl3JluKRpp0Hc7RoxUBrsKjP/2T12V1YE0Oevxnh7VYTwXlj86cy+A2IqjOLgiuELEShGoG6ROoRYmITqseVYhmLU9PKggULCy4dFMPrmF3qJFmfcdR+5HPaiPPBaWRUHFC3H+CO4hYCUIl2f/1I9waxkiXcX+nxl2v5e2DC55xqhGpg3UvRA+WBz3nzgqspfWdMZcDPjyZRVt30P9+28BVKP5661hqG169jRWF2k/ZK8KCIFQLSEFod91j2sh9SiqwOOFFnW7+q8cL1e7YEyxU4PlxN4pQCW4hYiUINQACI/rc/YVlseEy0cpzGYFAdZ/0Vo22pHGHP6KP0kvfLeZt1PrrEtGctwWhLESsBOEigAhOJI8jEbzPPV9yvhw6VFcEWFaIbkVuFXLrUIGl/0PzPT767+dde+nVJT/y9su3j3Oq/ycIpSFrVoJQScpasxKIZq/bRN9tsnU3QIdgNF4UhPIgYiUIQrWRlp3DzRNX7dvPuVSI+hOLSqgIIlaCIFQ5BYWFtGzHHlq2cw/nUUl4ulBZRKwEQahS0MH3RyVS6E/VMCiQ7rh8iCT8CpVGxEoQhCphU/RRtqRQkBbNEscP6k/jlUihmaIgVBYRK0EQKsyhUwm07Vgs7Yw5TocTbEWEr+vVnYWqS4Rn53sJtQsRK0GoQ+w7EU+NggKrtXlhbFIyrT0QTduOxtLx5BTeB0vqym6d6YY+PWlQB+euy4JQWUSsBKEOMfrfb/O9r7c3dWgazlXMO6ob7jHG/vKA4IgTKakUp24nklMpOiFRjc9qj5J67aYsUld27UytmjTS9gpC1SNiJQh1CHTcPRB/muKUsBxJtPf20oHFFRbcgEXL17s++fC9bdt2703JSqDilCBBpPIuXND+0k5Eo1Dq2aoli9TQTh20vYJQvYhYCUIdJTc/n0UrNjmFjiScYesoMzePMnJz+b7IjX/6gX6+1K1FhLo1p47Nm1L78HAWK0G42IhYCcIlSlbeeSVauUq88qiwqIj8fHzI38eb7/3Uvb+3j7K86mvPFoSaRcRKEARB8HikkK0gCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB6PiJUgCILg8YhYCYIgCB4O0f8H9Kj6IRnB81IAAAAASUVORK5CYII=" alt="Warba Insurance & Reinsurance">
+  <div class="lang-toggle">
+    <button id="btnEn" class="active" onclick="setLang('en')">English</button>
+    <button id="btnAr" onclick="setLang('ar')">العربية</button>
+  </div>
+</div>
+
+<div class="hero">
+  <h1 data-lang="en">Warba Insurance Academy</h1>
+  <h1 data-lang="ar">أكاديمية وربة للتأمين</h1>
+  <p data-lang="en">Student Commitment Form</p>
+  <p data-lang="ar">نموذج التزام الطالب</p>
+</div>
+
+<div class="container">
+
+  <form id="commitForm">
+    <div class="card">
+      <div class="field">
+        <label data-lang="en">Your Name</label>
+        <label data-lang="ar">الاسم الكامل</label>
+        <input type="text" id="fullName" required autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label data-lang="en">Date</label>
+        <label data-lang="ar">التاريخ</label>
+        <div class="date-display" id="dateDisplay">—</div>
+      </div>
+
+      <div class="field" style="margin-bottom:0;">
+        <label data-lang="en">Phone Number</label>
+        <label data-lang="ar">رقم الهاتف</label>
+        <input type="tel" id="phone" required autocomplete="tel" placeholder="+965 ...">
+      </div>
+    </div>
+
+    <!-- QUESTION 1 -->
+    <div class="card">
+      <div class="q-block" style="border-top:none;padding-top:0;">
+        <div class="q-eyebrow" data-lang="en">Question 1</div>
+        <div class="q-eyebrow" data-lang="ar">السؤال الأول</div>
+        <div class="q-title" data-lang="en">Why are you here?</div>
+        <div class="q-title" data-lang="ar">ليش انت هني؟</div>
+        <div class="q-sub" data-lang="en">What is the main reason you joined this academy? (You may select more than one)</div>
+        <div class="q-sub" data-lang="ar">شنو السبب الرئيسي اللي خلاك تنضم للأكاديمية؟ (تقدر تختار أكثر من خيار)</div>
+
+        <label class="option" data-group="q1">
+          <input type="checkbox" name="q1" value="I want a permanent, full-time job here">
+          <span class="opt-text">
+            <span data-lang="en">I want to work hard and get a permanent, full-time job here.</span>
+            <span data-lang="ar">أبغى أشتغل بجد وأحصل على وظيفة دائمة وبدوام كامل هني.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q1">
+          <input type="checkbox" name="q1" value="I want to learn sales & marketing skills for my CV">
+          <span class="opt-text">
+            <span data-lang="en">I want to learn real sales and marketing skills to improve my CV.</span>
+            <span data-lang="ar">أبغى أتعلم مهارات مبيعات وتسويق حقيقية عشان أطور سيرتي الذاتية.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q1">
+          <input type="checkbox" name="q1" value="I want to finish the program, get certificate and money">
+          <span class="opt-text">
+            <span data-lang="en">I am here to finish the program, get my certificate, and get the money.</span>
+            <span data-lang="ar">أنا هني عشان أكمل البرنامج، وأخذ شهادتي، وأخذ الفلوس.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q1">
+          <input type="checkbox" name="q1" value="Other" onchange="toggleOther('q1other', this)">
+          <span class="opt-text">
+            <span data-lang="en">Other — write exactly what you're looking for</span>
+            <span data-lang="ar">غير كذا — اكتب اللي تبيه بالضبط</span>
+          </span>
+        </label>
+        <div class="other-wrap" id="q1other" style="display:none;">
+          <input type="text" id="q1otherText" data-lang="en" placeholder="Tell us here...">
+          <input type="text" id="q1otherTextAr" data-lang="ar" placeholder="اكتب هني...">
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="card">
+      <div class="q-block" style="border-top:none;padding-top:0;">
+        <div class="q-eyebrow" data-lang="en">Question 2</div>
+        <div class="q-eyebrow" data-lang="ar">السؤال الثاني</div>
+        <div class="q-title" data-lang="en">What do you need from us?</div>
+        <div class="q-title" data-lang="ar">شنو تحتاجونه منا؟</div>
+        <div class="q-sub" data-lang="en">What motivates you the most to do a great job? (You may select more than one)</div>
+        <div class="q-sub" data-lang="ar">شنو أكثر شي يحفزك عشان تسوي شغل زين؟ (تقدر تختار أكثر من خيار)</div>
+
+        <label class="option" data-group="q2">
+          <input type="checkbox" name="q2" value="Extra Money">
+          <span class="opt-text">
+            <span data-lang="en"><b>Extra Money:</b> I want cash bonuses and rewards when I hit my targets.</span>
+            <span data-lang="ar"><b>فلوس زيادة:</b> أبغى بونصات نقدية ومكافآت لما أحقق أهدافي.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q2">
+          <input type="checkbox" name="q2" value="Good Reputation">
+          <span class="opt-text">
+            <span data-lang="en"><b>Good Reputation:</b> I want a great score, a strong recommendation letter, and support from the bosses.</span>
+            <span data-lang="ar"><b>سمعة زينة:</b> أبغى تقييم زين، وخطاب توصية قوي، ودعم من الإدارة.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q2">
+          <input type="checkbox" name="q2" value="Freedom">
+          <span class="opt-text">
+            <span data-lang="en"><b>Freedom:</b> I want the freedom to do my work and create things without people watching me too closely.</span>
+            <span data-lang="ar"><b>الحرية:</b> أبغى أسوي شغلي وأبتكر أشياء بدون أحد يراقبني بشكل مبالغ فيه.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q2">
+          <input type="checkbox" name="q2" value="Other" onchange="toggleOther('q2other', this)">
+          <span class="opt-text">
+            <span data-lang="en">Other — write exactly what you're looking for</span>
+            <span data-lang="ar">غير كذا — اكتب اللي تبيه بالضبط</span>
+          </span>
+        </label>
+        <div class="other-wrap" id="q2other" style="display:none;">
+          <input type="text" id="q2otherText" data-lang="en" placeholder="Tell us here...">
+          <input type="text" id="q2otherTextAr" data-lang="ar" placeholder="اكتب هني...">
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="card">
+      <div class="q-block" style="border-top:none;padding-top:0;">
+        <div class="q-eyebrow" data-lang="en">Question 3</div>
+        <div class="q-eyebrow" data-lang="ar">السؤال الثالث</div>
+        <div class="q-title" data-lang="en">What can you give to us?</div>
+        <div class="q-title" data-lang="ar">شنو تقدر تعطينا؟</div>
+        <div class="q-sub" data-lang="en">Where can you help our company grow starting tomorrow? (You may select more than one)</div>
+        <div class="q-sub" data-lang="ar">وين تقدر تساعد شركتنا تكبر من باچر؟ (تقدر تختار أكثر من خيار)</div>
+
+        <label class="option" data-group="q3">
+          <input type="checkbox" name="q3" value="Job A: Sales Outside the Office">
+          <span class="opt-text">
+            <span data-lang="en"><b>Job A: Sales Outside the Office</b><br>My Promise: I will go outside, meet people, explain our insurance, and bring in real buying customers.</span>
+            <span data-lang="ar"><b>الوظيفة أ: مبيعات خارج المكتب</b><br>وعدي: بروح برا، أقابل الناس، أشرح لهم عن التأمين، وأجيب زباين حقيقيين يشترون.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q3">
+          <input type="checkbox" name="q3" value="Job B: Finding Leads & Contacts">
+          <span class="opt-text">
+            <span data-lang="en"><b>Job B: Finding Leads & Contacts</b><br>My Promise: I will talk to my friends and family to get their phone numbers and insurance details so our team can call them.</span>
+            <span data-lang="ar"><b>الوظيفة ب: البحث عن عملاء محتملين</b><br>وعدي: بتكلم مع أصحابي وأهلي عشان أخذ أرقامهم وتفاصيل تأمينهم عشان فريقنا يتواصل وياهم.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q3">
+          <input type="checkbox" name="q3" value="Job C: Instagram & Social Media">
+          <span class="opt-text">
+            <span data-lang="en"><b>Job C: Instagram & Social Media</b><br>My Promise: I will make great videos, Reels, and TikToks to get more followers and likes for our company page.</span>
+            <span data-lang="ar"><b>الوظيفة ج: انستقرام ووسائل التواصل</b><br>وعدي: بسوي فيديوهات وريلز وتيك توك زينة عشان نزيد المتابعين والإعجابات لصفحة شركتنا.</span>
+          </span>
+        </label>
+        <label class="option" data-group="q3">
+          <input type="checkbox" name="q3" value="Other" onchange="toggleOther('q3other', this)">
+          <span class="opt-text">
+            <span data-lang="en">Other — write exactly what you're looking for</span>
+            <span data-lang="ar">غير كذا — اكتب اللي تبيه بالضبط</span>
+          </span>
+        </label>
+        <div class="other-wrap" id="q3other" style="display:none;">
+          <input type="text" id="q3otherText" data-lang="en" placeholder="Tell us here...">
+          <input type="text" id="q3otherTextAr" data-lang="ar" placeholder="اكتب هني...">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="promise-box">
+        <span data-lang="en">"I promise that my answers are honest. I am ready to work hard in the group I chose, and I know the management will check my work every day."</span>
+        <span data-lang="ar">"أتعهد إن إجاباتي صادقة. أنا مستعد أشتغل بجد بالمجموعة اللي اخترتها، وأعرف إن الإدارة بتتابع شغلي يومياً."</span>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span data-lang="en">Submit Commitment Form</span>
+        <span data-lang="ar">إرسال النموذج</span>
+      </button>
+      <div class="error-text" id="errorText">
+        <span data-lang="en">Something went wrong. Please try again.</span>
+        <span data-lang="ar">صار خطأ. حاول مرة ثانية.</span>
+      </div>
+      <div class="footer-note" data-lang="en">Warba Insurance Academy</div>
+      <div class="footer-note" data-lang="ar">أكاديمية وربة للتأمين</div>
+    </div>
+  </form>
+
+  <div class="success-screen" id="successScreen">
+    <div class="check">✓</div>
+    <h2 data-lang="en">Thank you!</h2>
+    <h2 data-lang="ar">شكراً لك!</h2>
+    <p data-lang="en">Your commitment form has been submitted successfully.</p>
+    <p data-lang="ar">تم إرسال نموذج التزامك بنجاح.</p>
+  </div>
+
+</div>
+
+<script>
+  // ===== SCRIPT_URL: paste your deployed Google Apps Script Web App URL below =====
+  const SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+  function setLang(lang){
+    document.body.classList.toggle('rtl', lang === 'ar');
+    document.getElementById('htmlRoot').setAttribute('lang', lang);
+    document.getElementById('htmlRoot').setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.getElementById('btnAr').classList.toggle('active', lang === 'ar');
+  }
+
+  function toggleOther(id, checkbox){
+    document.getElementById(id).style.display = checkbox.checked ? 'block' : 'none';
+  }
+
+  // highlight checked options
+  document.querySelectorAll('.option').forEach(opt => {
+    const cb = opt.querySelector('input[type=checkbox]');
+    cb.addEventListener('change', () => opt.classList.toggle('checked', cb.checked));
+  });
+
+  // auto current date, formatted for both locales
+  const today = new Date();
+  const enDate = today.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+  const arDate = today.toLocaleDateString('ar-KW', { day:'numeric', month:'long', year:'numeric' });
+  document.getElementById('dateDisplay').textContent = document.body.classList.contains('rtl') ? arDate : enDate;
+  // keep date synced with language toggle
+  const origSetLang = setLang;
+  setLang = function(lang){
+    origSetLang(lang);
+    document.getElementById('dateDisplay').textContent = lang === 'ar' ? arDate : enDate;
+  };
+
+  function getChecked(name){
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(i => i.value);
+  }
+
+  document.getElementById('commitForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const errorText = document.getElementById('errorText');
+    errorText.style.display = 'none';
+
+    const q1 = getChecked('q1');
+    const q2 = getChecked('q2');
+    const q3 = getChecked('q3');
+
+    if(q1.includes('Other')){
+      const t = document.getElementById('q1otherText').value || document.getElementById('q1otherTextAr').value;
+      if(t) q1[q1.indexOf('Other')] = 'Other: ' + t;
+    }
+    if(q2.includes('Other')){
+      const t = document.getElementById('q2otherText').value || document.getElementById('q2otherTextAr').value;
+      if(t) q2[q2.indexOf('Other')] = 'Other: ' + t;
+    }
+    if(q3.includes('Other')){
+      const t = document.getElementById('q3otherText').value || document.getElementById('q3otherTextAr').value;
+      if(t) q3[q3.indexOf('Other')] = 'Other: ' + t;
+    }
+
+    if(q1.length === 0 || q2.length === 0 || q3.length === 0){
+      errorText.querySelector('[data-lang="en"]').textContent = "Please answer all three questions before submitting.";
+      errorText.querySelector('[data-lang="ar"]').textContent = "الرجاء الإجابة على الأسئلة الثلاثة قبل الإرسال.";
+      errorText.style.display = 'block';
+      return;
+    }
+
+    const payload = {
+      name: document.getElementById('fullName').value,
+      phone: document.getElementById('phone').value,
+      date: new Date().toISOString().slice(0,10),
+      q1: q1.join(' | '),
+      q2: q2.join(' | '),
+      q3: q3.join(' | '),
+      language: document.body.classList.contains('rtl') ? 'Arabic' : 'English'
+    };
+
+    btn.disabled = true;
+    btn.textContent = '...';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      document.getElementById('commitForm').style.display = 'none';
+      document.getElementById('successScreen').classList.add('show');
+    })
+    .catch(() => {
+      errorText.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = '<span data-lang="en">Submit Commitment Form</span><span data-lang="ar">إرسال النموذج</span>';
+    });
+  });
+</script>
+
+</body>
+</html>
